@@ -38,15 +38,15 @@ const RECORD = {
     category: "badges",
     group: "Group 1",
     name: "Master Combat Action Badge",
-    suffix: "3rd Award",
-    image: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Master_Combat_Action_Badge_3x_Award.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+    suffix: "1st Award",
+    image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Master_combat_action_badge_illustration.svg/1920px-Master_combat_action_badge_illustration.svg.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   },
 {
     category: "badges",
     group: "Group 1",
     name: "Master Combat Medical Badge",
-    suffix: "1st Award",
-    image: "https://upload.wikimedia.org/wikipedia/commons/9/9f/US_Army_Master_Combat_Medical_Badge.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+    suffix: "3rd Award",
+    image: "https://upload.wikimedia.org/wikipedia/commons/0/02/US_Army_Master_Combat_Medical_Badge_3rd_Award.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
   },
 {
     category: "badges",
