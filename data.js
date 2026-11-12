@@ -4,12 +4,12 @@
   does not contain a personal public profile for a specific user.
 */
 const RECORD = {
-  username: "WarriorA350",
-  robloxId: "4028570900",
-  discordId: "1198689576093495348",
-  rank: "[E9B] Command Sergeant Major ",
+  username: "In5talledBaretti",
+  robloxId: "4190193229",
+  discordId: "791413138393792562",
+  rank: "[E5] Sergeant",
   command: "Army Special Operation Command",
-  division: "John F. Kennedy Special Warfare Center and School",
+  division: "Army Special Forces",
   brigade: "-",
   company: "-",
   joinDate: "10/03/2026",
