@@ -7,7 +7,7 @@ const RECORD = {
   username: "In5talledBeretti",
   robloxId: "4190193229",
   discordId: "791413138393792562",
-  rank: "[E5] Sergeant",
+  rank: "[E5] Sergeant ",
   command: "Army Special Operation Command",
   division: "Army Special Forces",
   brigade: "5th Special Forces Group",
