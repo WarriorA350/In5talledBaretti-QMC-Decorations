@@ -7,16 +7,16 @@ const RECORD = {
   username: "WarriorA350",
   robloxId: "4028570900",
   discordId: "1198689576093495348",
-  rank: "[O6] Colonel",
+  rank: "[E9B] Command Sergeant Major ",
   command: "Army Special Operation Command",
   division: "John F. Kennedy Special Warfare Center and School",
-  brigade: "1st Special Warfare Training Group",
+  brigade: "-",
   company: "-",
   joinDate: "10/03/2026",
   timeOfService: "",
-  position: "Group Commanding Officer",
-  positionDate: "21/07/2026",
-  profileImage: "https://i.imgur.com/suejzjo.png",
+  position: "Regimental Sergeant Major ",
+  positionDate: "15/09/2026",
+  profileImage: "https://i.imgur.com/1VgpzOd.png",
 
   // Put only awards actually earned here. `group` controls the heading shown
   // on the Decorations page, matching the reference site's presentation.
@@ -38,8 +38,8 @@ const RECORD = {
     category: "badges",
     group: "Group 1",
     name: "Master Combat Action Badge",
-    suffix: "1st Award",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Master_combat_action_badge_illustration.svg/1920px-Master_combat_action_badge_illustration.svg.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    suffix: "2nd Award",
+    image: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Master_Combat_Action_Badge_2x_Award.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
   },
 {
     category: "badges",
@@ -66,8 +66,8 @@ const RECORD = {
     category: "badges",
     group: "Group 4",
     name: "Army Parachutist Badge",
-    suffix: "Master - 3 Combat Jump Stars",
-    image: "https://i.imgur.com/1vF78xF.png"
+    suffix: "Master - 5 Combat Jump Stars ",
+    image: "https://i.imgur.com/3wwzadX.png"
   },
 {
     category: "badges",
@@ -87,15 +87,15 @@ const RECORD = {
     category: "badges",
     group: "Group 4",
     name: "Military Freefall Badge",
-    suffix: "Basic - 2 Combat Jump Stars",
-    image: "https://i.imgur.com/LkedZyg.png"
+    suffix: "Master - 3 Combat Jump Stars ",
+    image: "https://i.imgur.com/vm5u586.png"
   },
 {
     category: "badges",
     group: "Group 4",
     name: "Special Operations Diver Badge",
     suffix: "Basic",
-    image: "https://i.imgur.com/69HJLN5.png"
+    image: "https://i.imgur.com/LjIu4wp.png"
   },
 {
     category: "badges",
@@ -115,22 +115,36 @@ const RECORD = {
     category: "badges",
     group: "Identification Badges",
     name: "Army Instructor Identification Badge",
-    suffix: "Senior",
-    image: "https://upload.wikimedia.org/wikipedia/commons/b/b1/US_Army_Senior_Instructor_ID_Badge.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+    suffix: "Master",
+    image: "https://upload.wikimedia.org/wikipedia/commons/e/e8/US_Army_Master_Instructor_ID_Badge.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
   },
 {
     category: "badges",
     group: "Identification Badges",
     name: "Army Recruiter Badge",
-    suffix: "Gold",
-    image: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Gold_Recruiting_Badge.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+    suffix: "Master",
+    image: "https://upload.wikimedia.org/wikipedia/commons/7/72/Master_Recruiter.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original"
   },
 {
     category: "badges",
     group: "Identification Badges",
     name: "Combat Service Identification Badge",
-    suffix: "John F. Kennedy, Southwest Asia Campaign, Iraq Campaign, Task Force Dagger",
+    suffix: "John F. Kennedy, Southwest Asia Campaign, Iraq Campaign, Task Force Dagger, North Atlantic Treaty Organization, Afghanistan Campaign",
     image: "https://upload.wikimedia.org/wikipedia/commons/2/28/Combat-Service-Identification-Badges.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+  },
+{
+    category: "badges",
+    group: "Skill Tabs",
+    name: "Ranger Tab",
+    suffix: "",
+    image: "https://upload.wikimedia.org/wikipedia/commons/8/83/Ranger_Tab_-_Dress_Metal.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+  },
+{
+    category: "badges",
+    group: "Skill Tabs",
+    name: "Sapper Tab ",
+    suffix: "",
+    image: "https://upload.wikimedia.org/wikipedia/commons/9/94/Sapper_Tab.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
   },
 {
     category: "badges",
@@ -143,7 +157,7 @@ const RECORD = {
     category: "badges",
     group: "Service Awards",
     name: "Overseas Service Bars",
-    suffix: "8th Award",
+    suffix: "9th Award ",
     image: "https://upload.wikimedia.org/wikipedia/commons/8/88/ASU_overseas_service_bar.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
   },
 {
@@ -179,21 +193,21 @@ const RECORD = {
     group: "Foreign Awards",
     name: "National Guard Bureau's Chief's 50 Marksmanship Badge",
     suffix: "",
-    image: "https://upload.wikimedia.org/wikipedia/commons/d/de/Chiefs_50_Marksmanship_Badge.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+    image: "https://i.imgur.com/MFbXAF0.png"
   },
 {
     category: "badges",
     group: "Foreign Awards",
     name: "Republic of Korea Jump Wings",
-    suffix: "Basic Airborne Wings",
-    image: "https://i.imgur.com/RrGFOx3.png"
+    suffix: "Senior Airborne Wings",
+    image: "https://i.imgur.com/5AEq0dB.png"
   },
 {
     category: "badges",
     group: "Foreign Awards",
     name: "Special Air Service Parachute Wings",
     suffix: "",
-    image: "https://i.imgur.com/6LFTGx0.png"
+    image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/British_Army_SAS_Parachute_Badge_with_Wings.png/500px-British_Army_SAS_Parachute_Badge_with_Wings.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail"
   },
 {
     category: "badges",
@@ -220,7 +234,7 @@ const RECORD = {
     category: "badges",
     group: "Ribbons",
     name: "Army of Occupation Medal",
-    suffix: "1st Award",
+    suffix: "",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Army_of_Occupation_ribbon.svg/1920px-Army_of_Occupation_ribbon.svg.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   },
 {
@@ -254,6 +268,13 @@ const RECORD = {
 {
     category: "badges",
     group: "Ribbons",
+    name: "Military Justice Ribbon",
+    suffix: "",
+    image: "https://i.imgur.com/t60tBYY.png"
+  },
+{
+    category: "badges",
+    group: "Ribbons",
     name: "Army Recruiting Medal",
     suffix: "",
     image: "https://i.imgur.com/lvHoUVU.png"
@@ -277,7 +298,14 @@ const RECORD = {
     group: "Ribbons",
     name: "Southwest Asia Service Campaign Medal",
     suffix: "3rd Award",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Southwest_Asia_Service_Medal_ribbon.svg/1920px-Southwest_Asia_Service_Medal_ribbon.svg.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+    image: "https://i.imgur.com/A2s9UOt.png"
+  },
+{
+    category: "badges",
+    group: "Ribbons",
+    name: "Afghanistan Campaign Ribbon",
+    suffix: "3rd Award",
+    image: "https://i.imgur.com/O7OA0XP.png"
   },
 {
     category: "badges",
@@ -285,6 +313,20 @@ const RECORD = {
     name: "Iraq Campaign Medal",
     suffix: "3rd Award",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Iraq_Campaign_Medal_ribbon%2C_5th_award.svg/1920px-Iraq_Campaign_Medal_ribbon%2C_5th_award.svg.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  },
+{
+    category: "badges",
+    group: "Ribbons",
+    name: "Joint Special Operation Campaign",
+    suffix: "",
+    image: "https://i.imgur.com/iBBIiFW.png"
+  },
+{
+    category: "badges",
+    group: "Ribbons",
+    name: "Korean War Service Medal",
+    suffix: "",
+    image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Republic_of_Korea_War_Service_Medal_ribbon.svg/1920px-Republic_of_Korea_War_Service_Medal_ribbon.svg.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
   },
 {
     category: "badges",
@@ -303,9 +345,30 @@ const RECORD = {
 {
     category: "badges",
     group: "Ribbons",
+    name: "Humanitarian Service Ribbon",
+    suffix: "2nd Award ",
+    image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Humanitarian_Service_Medal_ribbon.svg/1920px-Humanitarian_Service_Medal_ribbon.svg.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  },
+{
+    category: "badges",
+    group: "Ribbons",
     name: "Army Overseas Service Medal",
     suffix: "",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Army_Overseas_Service_Ribbon.svg/1920px-Army_Overseas_Service_Ribbon.svg.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  },
+{
+    category: "badges",
+    group: "Ribbons",
+    name: "NATO Non-Article 5 Medal",
+    suffix: "1st Award",
+    image: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/NATO_Medal_ribbon_%28Non-Article_5%29.svg/1920px-NATO_Medal_ribbon_%28Non-Article_5%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+  },
+{
+    category: "badges",
+    group: "Unit Awards",
+    name: "Army Superior Unit Award",
+    suffix: "2nd Award - Army Special Operations Command, Army Administrative Command",
+    image: "https://i.imgur.com/jav9cKq.png"
   },
 ],
 
