@@ -1,87 +1,330 @@
 const tabs = ["PROFILE", "DECORATIONS"];
-let imageMap = {badges:{}, ribbons:{}, foreign:{}};
+
+let imageMap = {
+  badges: {},
+  ribbons: {},
+  foreign: {}
+};
+
 let active = "PROFILE";
 
-fetch("image-map.json").then(r => r.json()).then(m => { imageMap = m; render(); }).catch(() => render());
+/* Load the image map */
+fetch("image-map.json")
+  .then(response => {
+    if (!response.ok) throw new Error("Could not load image-map.json");
+    return response.json();
+  })
+  .then(map => {
+    imageMap = map;
+    render();
+  })
+  .catch(() => {
+    render();
+  });
 
-document.getElementById("tabs").addEventListener("click", e => {
-  const button = e.target.closest("button[data-tab]");
+/* Tab navigation */
+document.getElementById("tabs").addEventListener("click", event => {
+  const button = event.target.closest("button[data-tab]");
   if (!button) return;
+
   active = button.dataset.tab;
   render();
-  window.scrollTo({top:0, behavior:"smooth"});
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 });
 
-function esc(v="") { return String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c])); }
-function imgFor(a) {
-  if (a.image) return a.image;
-  const key = (a.imageKey || a.name || "").toLowerCase();
-  return imageMap[a.category]?.[key] || imageMap.badges?.[key] || imageMap.ribbons?.[key] || imageMap.foreign?.[key] || "";
+/* Lightbox Modal Logic */
+function openLightbox(src, title) {
+  let modal = document.getElementById("imageLightbox");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "imageLightbox";
+    modal.className = "image-modal";
+    modal.innerHTML = `
+      <div class="modal-content">
+        <button type="button" class="modal-close" aria-label="Close">&times;</button>
+        <img id="modalImg" src="" alt="Enlarged award">
+        <div id="modalCaption" class="modal-caption"></div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal || e.target.classList.contains("modal-close")) {
+        modal.classList.remove("open");
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("open")) {
+        modal.classList.remove("open");
+      }
+    });
+  }
+
+  document.getElementById("modalImg").src = src;
+  document.getElementById("modalCaption").textContent = title || "";
+  modal.classList.add("open");
 }
+
+/* Prevent HTML from breaking the page */
+function esc(value = "") {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  }[character]));
+}
+
+/* Get award image */
+function imgFor(award) {
+  if (award.image) {
+    return award.image;
+  }
+
+  const key = (
+    award.imageKey ||
+    award.name ||
+    ""
+  ).toLowerCase();
+
+  return (
+    imageMap[award.category]?.[key] ||
+    imageMap.badges?.[key] ||
+    imageMap.ribbons?.[key] ||
+    imageMap.foreign?.[key] ||
+    ""
+  );
+}
+
+/* Automatically calculate service time */
 function calculateTimeOfService(joinDate) {
   if (!joinDate) return "";
-  // Service-record dates use DD/MM/YY (e.g. 03/06/26 = 3 June 2026).
-  const match = String(joinDate).trim().match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{2}|\d{4})$/);
+
+  const match = String(joinDate)
+    .trim()
+    .match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{2}|\d{4})$/);
+
   if (!match) return "";
+
   const day = Number(match[1]);
   const month = Number(match[2]);
   let year = Number(match[3]);
-  if (year < 100) year += 2000;
-  const start = new Date(year, month - 1, day);
-  if (Number.isNaN(start.getTime())) return "";
+
+  if (year < 100) {
+    year += 2000;
+  }
+
+  const startDate = new Date(year, month - 1, day);
+  if (Number.isNaN(startDate.getTime())) {
+    return "";
+  }
+
   const today = new Date();
   const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
-  const startUTC = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
+  const startUTC = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+
   const days = Math.floor((todayUTC - startUTC) / 86400000);
   if (days < 0) return "";
+
   return `${days} day${days === 1 ? "" : "s"}`;
 }
 
+/* Profile field */
 function field(label, value) {
-  return `<div class="field"><div class="label">${esc(label)}</div><div class="value">${esc(value || "—")}</div></div>`;
-}
-function awardCard(a) {
-  const src = imgFor(a);
-  return `<article class="award-card">
-    <div class="award-image">${src ? `<img src="${esc(src)}" alt="${esc(a.name)}" loading="lazy">` : `<div class="image-placeholder">AWARD</div>`}</div>
-    <div class="award-copy"><div class="award-name">${esc(a.name)}</div>${a.suffix ? `<div class="award-suffix">${esc(a.suffix)}</div>` : ""}</div>
-  </article>`;
-}
-function section(title, awards) {
-  const groups = {};
-  awards.forEach(a => (groups[a.group || "Group 1"] ||= []).push(a));
-  return `<section class="record-panel"><div class="panel-title">${esc(title)}</div><div class="panel-body">
-    ${Object.keys(groups).map(g => `<div class="award-group"><h2>${esc(g)}</h2><div class="gold-rule"></div><div class="award-list">${groups[g].map(awardCard).join("")}</div></div>`).join("") || `<div class="empty">No records have been added yet.</div>`}
-  </div></section>`;
-}
-function profile() {
-  const r = RECORD;
-  return `<section class="record-panel profile-panel"><div class="panel-title">PROFILE</div><div class="panel-body profile-body">
-    <div class="profile-photo-wrap"><img class="profile-photo" src="${esc(r.profileImage)}" alt="Profile photo"></div>
-    <div class="profile-grid">
-      ${field("USERNAME", r.username)}${field("ROBLOX ID", r.robloxId)}
-      ${field("DISCORD ID", r.discordId)}${field("RANK", r.rank)}
-      ${field("COMMAND", r.command)}${field("DIVISION", r.division)}
-      ${field("BRIGADE/BATTALION/GROUP", r.brigade)}${field("COMPANY", r.company)}
-      ${field("JOIN DATE", r.joinDate)}${field("UNIT TIME OF SERVICE", r.timeOfService || calculateTimeOfService(r.joinDate))}
-      ${field("POSITION", r.position)}${field("POSITION DATE OF HIRE", r.positionDate)}
+  return `
+    <div class="field">
+      <div class="label">${esc(label)}</div>
+      <div class="value">${esc(value || "—")}</div>
     </div>
-    <div class="generated">Public service record for WarriorA350.</div>
-  </div></section>`;
+  `;
 }
-function operations(key) {
-  const rows = RECORD.operations?.[key] || [];
-  return `<section class="record-panel"><div class="panel-title">${esc(key)}</div><div class="panel-body">
-    ${rows.length ? rows.map(row => `<div class="operation"><div class="operation-title">${esc(row.title || row.name || "Record")}</div><div class="operation-detail">${esc(row.detail || "")}</div></div>`).join("") : `<div class="empty">No ${esc(key)} records have been added yet.</div>`}
-  </div></section>`;
+
+/* Fallback handler for award image error */
+function handleAwardImageError(img) {
+  img.onerror = null;
+  const parent = img.parentElement;
+  if (parent) {
+    parent.innerHTML = '<div class="image-placeholder">NO IMAGE</div>';
+  }
 }
+
+/* Individual award */
+function awardCard(award) {
+  const image = imgFor(award);
+
+  return `
+    <article class="award-card">
+      <div class="award-image">
+        ${
+          image
+            ? `
+              <img
+                src="${esc(image)}"
+                alt="${esc(award.name)}"
+                loading="lazy"
+                onerror="handleAwardImageError(this)"
+                onclick="openLightbox('${esc(image)}', '${esc(award.name)}')"
+              >
+            `
+            : `
+              <div class="image-placeholder">
+                AWARD
+              </div>
+            `
+        }
+      </div>
+
+      <div class="award-copy">
+        <div class="award-name">
+          ${esc(award.name)}
+        </div>
+        ${
+          award.suffix
+            ? `
+              <div class="award-suffix">
+                ${esc(award.suffix)}
+              </div>
+            `
+            : ""
+        }
+      </div>
+    </article>
+  `;
+}
+
+/* Award sections */
+function section(title, awards = []) {
+  const groups = {};
+
+  awards.forEach(award => {
+    const group = award.group || "Group 1";
+    if (!groups[group]) {
+      groups[group] = [];
+    }
+    groups[group].push(award);
+  });
+
+  const groupHTML = Object.keys(groups)
+    .map(group => {
+      return `
+        <div class="award-group">
+          <h2>${esc(group)}</h2>
+          <div class="gold-rule"></div>
+          <div class="award-list">
+            ${groups[group].map(awardCard).join("")}
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+
+  return `
+    <section class="record-panel">
+      <div class="panel-title">${esc(title)}</div>
+      <div class="panel-body">
+        ${
+          groupHTML ||
+          `<div class="empty">No records have been added yet.</div>`
+        }
+      </div>
+    </section>
+  `;
+}
+
+/* Profile page */
+function profile() {
+  const record = typeof RECORD !== "undefined" ? RECORD : {};
+
+  const serviceTime =
+    record.timeOfService ||
+    calculateTimeOfService(record.joinDate);
+
+  return `
+    <section class="record-panel profile-panel">
+      <div class="panel-title">PROFILE</div>
+
+      <div class="panel-body profile-body">
+        <div class="profile-photo-wrap">
+          <img
+            class="profile-photo"
+            src="${esc(record.profileImage)}"
+            alt="Profile photo"
+            onerror="this.style.opacity='0.2'"
+          >
+        </div>
+
+        <div class="profile-grid">
+          ${field("USERNAME", record.username)}
+          ${field("ROBLOX ID", record.robloxId)}
+
+          ${field("DISCORD ID", record.discordId)}
+          ${field("RANK", record.rank)}
+
+          ${field("COMMAND", record.command)}
+          ${field("DIVISION", record.division)}
+
+          ${field("BRIGADE/BATTALION/GROUP", record.brigade)}
+          ${field("COMPANY", record.company)}
+
+          ${field("JOIN DATE", record.joinDate)}
+          ${field("UNIT TIME OF SERVICE", serviceTime)}
+
+          ${field("POSITION", record.position)}
+          ${field("POSITION DATE OF HIRE", record.positionDate)}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+/* Decorations page */
 function decorations() {
-  return section("DECORATIONS", RECORD.awards);
+  const awards = typeof RECORD !== "undefined" && RECORD.awards ? RECORD.awards : [];
+  return section("DECORATIONS", awards);
 }
+
+/* Render the page */
 function render() {
-  document.getElementById("pageTitle").textContent = `${RECORD.username || "YOURUSERNAME"} | SERVICE RECORD FILE`;
-  document.getElementById("subtitle").textContent = `PUBLIC SERVICE RECORD`;
-  document.getElementById("tabs").innerHTML = tabs.map(t => `<button data-tab="${t}" class="tab ${active===t?'active':''}">${t}</button>`).join("");
-  document.getElementById("app").innerHTML = active === "PROFILE" ? profile() : active === "DECORATIONS" ? decorations() : operations(active);
+  const record = typeof RECORD !== "undefined" ? RECORD : {};
+  const username = record.username || "WARRIORA350";
+
+  document.title = `${username} | Service Record File`;
+
+  const titleEl = document.getElementById("pageTitle");
+  if (titleEl) {
+    titleEl.textContent = `${username.toUpperCase()} | SERVICE RECORD FILE`;
+  }
+
+  const subEl = document.getElementById("subtitle");
+  if (subEl) {
+    subEl.textContent = "PUBLIC SERVICE RECORD";
+  }
+
+  const tabsContainer = document.getElementById("tabs");
+  if (tabsContainer) {
+    tabsContainer.innerHTML = tabs
+      .map(tab => `
+        <button
+          data-tab="${tab}"
+          class="tab ${active === tab ? "active" : ""}"
+        >
+          ${tab}
+        </button>
+      `)
+      .join("");
+  }
+
+  const appContainer = document.getElementById("app");
+  if (appContainer) {
+    appContainer.innerHTML = active === "PROFILE" ? profile() : decorations();
+  }
 }
+
+/* Initial render */
 render();
