@@ -12,7 +12,7 @@ const RECORD = {
   division: "Army Special Forces",
   brigade: "5th Special Forces Group",
   company: "Delta Company",
-  joinDate: "4/08/2026",
+  joinDate: "04/08/2026",
   timeOfService: "",
   position: "Operator",
   positionDate: "20/10/26",
