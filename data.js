@@ -227,7 +227,7 @@ const RECORD = {
     category: "badges",
     group: "Ribbons",
     name: "Army Commendation Medal",
-    suffix: ""C" Device",
+    suffix: "C - Device",
     image: "https://i.imgur.com/VoiXCQB.png"
   },
 {
