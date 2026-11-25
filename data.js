@@ -31,7 +31,7 @@ const RECORD = {
     category: "badges",
     group: "Group 1",
     name: "Master Combat Infantryman Badge",
-    suffix: "2nd Award",
+    suffix: "1st Award",
     image: "https://www.usamm.com/cdn/shop/files/86346.jpg?v=1759433839&width=1214"
   },
 {
